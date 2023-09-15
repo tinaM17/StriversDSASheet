@@ -1,4 +1,3 @@
-# StriversDSASheet
 # 30 Days of DSA Challenge
 
 ## Overview
