@@ -1,0 +1,24 @@
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    public static int maximumProduct(ArrayList<Integer> arr, int n) {
+        int pre = 1; // Initialize the prefix product to 1.
+        int suff = 1; // Initialize the suffix product to 1.
+        int ans = Integer.MIN_VALUE; // Initialize the answer to the minimum integer value.
+
+        for (int i = 0; i < n; i++) {
+            if (pre == 0) pre = 1; // Reset the prefix product to 1 if it becomes 0.
+            if (suff == 0) suff = 1; // Reset the suffix product to 1 if it becomes 0.
+
+            pre = pre * arr.get(i); // Calculate the prefix product.
+            suff = suff * arr.get(n - 1 - i); // Calculate the suffix product.
+
+            ans = Math.max(ans, Math.max(pre, suff)); // Update the answer with the maximum of ans, pre, and suff.
+        }
+
+        return ans; // Return the maximum product.
+    }
+}
