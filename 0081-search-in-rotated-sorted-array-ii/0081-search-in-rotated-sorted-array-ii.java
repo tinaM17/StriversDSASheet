@@ -1,35 +1,40 @@
 class Solution {
     public boolean search(int[] nums, int target) {
-        int low=0;
-        int high=nums.length-1;
-        
-        while(low<=high){
-            int mid=low +(high-low)/2;
-            if(target==nums[mid])
-                return true;
-            if(nums[low]== nums[mid] && nums[mid]== nums[high]){
-                low=low+1;
-                mid=mid+1;
-                continue;
+        int low = 0; // Initialize the low index.
+        int high = nums.length - 1; // Initialize the high index.
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Calculate the middle index.
+
+            // Check if the middle element equals the target.
+            if (target == nums[mid]) {
+                return true; // Target found, return true.
             }
-            if(nums[low]<=nums[mid]){
-                if(target<nums[mid] && target>=nums[low]){
-                    high=mid-1;
-                }
-                else {
-                    low=mid+1;
-                }
+
+            // Check if there are duplicates at the low, middle, and high positions.
+            if (nums[low] == nums[mid] && nums[mid] == nums[high]) {
+                low++; // Move the low index to skip the duplicate.
+                mid++; // Move the middle index to maintain consistency.
+                continue; // Continue to the next iteration.
             }
-            else {
-                if(target>=nums[mid] && target<=nums[high]){
-                    low=mid+1;
+
+            // Check if the left half (low to mid) is sorted.
+            if (nums[low] <= nums[mid]) {
+                if (target < nums[mid] && target >= nums[low]) {
+                    high = mid - 1; // Target is in the left half.
+                } else {
+                    low = mid + 1; // Target is in the right half.
                 }
-                else {
-                    high=mid-1;
+            } else {
+                // The right half (mid to high) is sorted.
+                if (target > nums[mid] && target <= nums[high]) {
+                    low = mid + 1; // Target is in the right half.
+                } else {
+                    high = mid - 1; // Target is in the left half.
                 }
             }
         }
-        return false;
-        
+
+        return false; // Target not found, return false.
     }
 }
