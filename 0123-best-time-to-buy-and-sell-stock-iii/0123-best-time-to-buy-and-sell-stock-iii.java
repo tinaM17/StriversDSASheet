@@ -1,5 +1,6 @@
 class Solution {
     public int maxProfit(int[] prices) {
+        //
         int n=prices.length;
         int pass[] = new int[n];
         int buy=Integer.MAX_VALUE;
